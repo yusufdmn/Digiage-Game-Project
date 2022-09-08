@@ -6,22 +6,28 @@ using UnityEngine.UI;
 public class PlayerTrigger : MonoBehaviour
 {
     [SerializeField] Image fillEnergy;
+    [SerializeField] float fillAmount;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "collectable")
         {
-            Collect(other.gameObject, 0.2f);
+            Collect(other.gameObject, fillAmount);
+            HideCollactable(other.gameObject);
         }
-        else if (other.tag == "superCollectable")
-            Collect(other.gameObject, 1f);
+     //   else if (other.tag == "superCollectable")
+      //      Collect(other.gameObject, fillAmount);
     }
 
-    void Collect(GameObject UIToBeEnabled, float fillAmount)
+    void Collect(GameObject UIToBeEnabled, float amount)
     {
         UIToBeEnabled.GetComponent<Collectable>().EnableClothesUI();
-        fillEnergy.fillAmount += fillAmount;
+        fillEnergy.fillAmount += amount;
     }
-
+    void HideCollactable(GameObject other)
+    {
+        other.tag = "Untagged";
+        other.gameObject.SetActive(false);
+    }
 
 }
