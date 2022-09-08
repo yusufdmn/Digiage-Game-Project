@@ -7,11 +7,12 @@ public class AIManager : MonoBehaviour
     private Animator anim;
 
     [SerializeField]
-    private GameObject[] objects;
+    private GameObject[] objects, targets;
     [SerializeField]
     private Transform rightHandPoint, leftHandPoint;
 
-    private int objectsNumber;
+
+    private int number;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -25,24 +26,27 @@ public class AIManager : MonoBehaviour
             {
                 case 0:
                     anim.SetTrigger("throwRight");
-                    GameObject newObject = Instantiate(objects[objectsNumber], rightHandPoint.transform.position, transform.rotation);
+                    GameObject newObject = Instantiate(objects[number], rightHandPoint.transform.position, transform.rotation);
                     newObject.GetComponent<Rigidbody>().AddForce(new Vector3(50, 200, 100));
 
                     break;
                 case 1:
                     anim.SetTrigger("throwLeft");
-                    newObject = Instantiate(objects[objectsNumber], leftHandPoint.transform.position, transform.rotation);
+                    newObject = Instantiate(objects[number], leftHandPoint.transform.position, transform.rotation);
                     newObject.GetComponent<Rigidbody>().AddForce(new Vector3(-50,200,100));
                     break;
-
             }
-
+            ++number;
         }
+
     }
     private void Update()
     {
-        transform.Translate(Vector3.forward * 0.01f);
+        if (number < targets.Length)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(targets[number].transform.position.x, 0.55f, targets[number].transform.position.z), 0.015f);
+            transform.rotation = Quaternion.Euler(0, targets[number].gameObject.transform.rotation.eulerAngles.y, 0);
+        }
     }
-
 
 }
