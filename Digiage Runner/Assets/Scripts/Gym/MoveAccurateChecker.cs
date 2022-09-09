@@ -1,9 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveAccurateChecker : MonoBehaviour
 {
+
+    private static MoveAccurateChecker _instance;      
+    public static MoveAccurateChecker Instance { get { return _instance; } }
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+    public List<Button> buttons;
+
     [SerializeField] GymMoves gymMoves;
     [SerializeField] float scoreIncrease;
     [SerializeField] ScoreBarController scoreBarController;
@@ -13,9 +31,12 @@ public class MoveAccurateChecker : MonoBehaviour
 
     public Dictionary<moves, GameObject> movesAndImages;
 
+    public static bool canMove;
+    [SerializeField] Animator gymPlayerAnimator;
 
     void Start()
     {
+        canMove = true;
         movesAndImages = gymMoves.movesAndImages;
         SetRandomMove();
     }
@@ -30,28 +51,37 @@ public class MoveAccurateChecker : MonoBehaviour
         {
             obj.SetActive(false);
         }
+        
         movesAndImages[currentMove].SetActive(true);
        
     }
 
     public void CheckAccurate(int moveInput)
     {
-        if (moveInput.Equals((int)currentMove))
+        if (canMove)
         {
-            scoreBarController.AddScore(scoreIncrease);
-            bool isFinished = scoreBarController.IsFinished();
-            //if (isFinished)//     GameOver();
-                           // Debug.Log("Finished");
-            SetRandomMove();
+            if (moveInput.Equals((int)currentMove))
+            {
+                foreach (Button btn in buttons)
+                    btn.interactable = false;
+                scoreBarController.AddScore(scoreIncrease);
+                gymPlayerAnimator.SetTrigger(((moves)moveInput).ToString());
+                //SetRandomMove();
+                canMove = false;   
+                // bool isFinished = scoreBarController.IsFinished();
+                //if (isFinished)//     GameOver();
+                // Debug.Log("Finished");
+            }
+            else
+                scoreBarController.AddScore(-scoreIncrease);
         }
-        else
-            scoreBarController.AddScore(-scoreIncrease);
-    }
 
+    }
 
     void Update()
     {
     //    if (Input.GetMouseButtonDown(0))
     //        SetRandomMove();
     }
+
 }
