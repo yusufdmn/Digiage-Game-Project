@@ -10,20 +10,28 @@ public class PlayerTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "collectable")
+        if (other.tag == "collectableClothes")
         {
-            Collect(other.gameObject, fillAmount);
+            CollectClothes(other.gameObject);
             HideCollactable(other.gameObject);
         }
-     //   else if (other.tag == "superCollectable")
-      //      Collect(other.gameObject, fillAmount);
+        else if(other.tag == "collectableFruits")
+        {
+            CollectFruits(fillAmount);
+            HideCollactable(other.gameObject);
+        }
     }
 
-    void Collect(GameObject UIToBeEnabled, float amount)
+    void CollectClothes(GameObject UIToBeEnabled)
     {
         UIToBeEnabled.GetComponent<Collectable>().EnableClothesUI();
+    }
+    void CollectFruits(float amount)
+    {
         fillEnergy.fillAmount += amount;
     }
+
+
     void HideCollactable(GameObject other)
     {
         other.tag = "Untagged";

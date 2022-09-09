@@ -17,7 +17,7 @@ public class SceneTransition : MonoBehaviour
     private void Finished()
     {
         blackScreen.SetActive(true);
-        closeAnimator.SetTrigger("close");
+        //closeAnimator.SetTrigger("close");
         StartCoroutine(CloseScene());
     }
     IEnumerator CloseScene()

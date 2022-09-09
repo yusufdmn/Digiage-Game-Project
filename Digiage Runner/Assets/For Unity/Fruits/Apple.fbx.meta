@@ -3,7 +3,17 @@ guid: b054d9f66d9131d49b83d92d1a2158dc
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Apple
+    second: {fileID: 2100000, guid: a445c97976ef79845ac811e134b761be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Apple Branch
+    second: {fileID: 2100000, guid: afdc943648c8c1e43bd311b384f3b26e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

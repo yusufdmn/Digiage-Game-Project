@@ -25,9 +25,8 @@ public class MoveAccurateChecker : MonoBehaviour
         nextMove = (moves)Random.Range(1, 5);
         while(nextMove.Equals(currentMove))
             nextMove = (moves)Random.Range(1, 5);
-        currentMove = nextMove; 
-
-        foreach(GameObject obj in movesAndImages.Values)
+        currentMove = nextMove;
+        foreach (GameObject obj in movesAndImages.Values)
         {
             obj.SetActive(false);
         }
@@ -41,9 +40,8 @@ public class MoveAccurateChecker : MonoBehaviour
         {
             scoreBarController.AddScore(scoreIncrease);
             bool isFinished = scoreBarController.IsFinished();
-            if (isFinished)//     GameOver();
-               // Debug.Log("Finished");
-                
+            //if (isFinished)//     GameOver();
+                           // Debug.Log("Finished");
             SetRandomMove();
         }
         else
