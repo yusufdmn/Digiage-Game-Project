@@ -44,8 +44,8 @@ public class AIManager : MonoBehaviour
     {
         if (number < targets.Length)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(targets[number].transform.position.x, 0.55f, targets[number].transform.position.z), 0.015f);
-            transform.rotation = Quaternion.Euler(0, targets[number].gameObject.transform.rotation.eulerAngles.y, 0);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(targets[number].transform.position.x, 0.55f, targets[number].transform.position.z), 0.05f);
+            transform.rotation = Quaternion.Euler(0, targets[number-1].gameObject.transform.rotation.eulerAngles.y, 0);
         }
     }
 

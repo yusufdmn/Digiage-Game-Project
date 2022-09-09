@@ -25,7 +25,7 @@ public class MoveAccurateChecker : MonoBehaviour
         nextMove = (moves)Random.Range(1, 5);
         while(nextMove.Equals(currentMove))
             nextMove = (moves)Random.Range(1, 5);
-        currentMove = nextMove;
+        currentMove = nextMove; 
 
         foreach(GameObject obj in movesAndImages.Values)
         {
@@ -37,14 +37,12 @@ public class MoveAccurateChecker : MonoBehaviour
 
     public void CheckAccurate(int moveInput)
     {
-        Debug.Log(currentMove + "   " + moveInput); 
         if (moveInput.Equals((int)currentMove))
         {
-            Debug.Log("in");
             scoreBarController.AddScore(scoreIncrease);
             bool isFinished = scoreBarController.IsFinished();
             if (isFinished)//     GameOver();
-                Debug.Log("Finished");
+               // Debug.Log("Finished");
                 
             SetRandomMove();
         }

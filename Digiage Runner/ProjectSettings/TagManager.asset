@@ -12,6 +12,7 @@ TagManager:
   - forward
   - back
   - targetPlace
+  - door
   layers:
   - Default
   - TransparentFX
